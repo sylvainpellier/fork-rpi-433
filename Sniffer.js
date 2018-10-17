@@ -8,7 +8,7 @@ var _            = require('underscore'),
 
 module.exports = Sniffer;
 
-console.log('a');
+console.log('B');
 
 Sniffer.SCRIPT = 'build/RFSniffer';
 Sniffer.process = null;
