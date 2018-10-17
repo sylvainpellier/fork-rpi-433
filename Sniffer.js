@@ -56,10 +56,23 @@ Sniffer.prototype.onError = function (error) {
 
 };
 
+// Sniffer.prototype.onData = function (buffer) {
+//
+//   this.emit('data', JSON.parse(buffer));
+//
+// };
+
 Sniffer.prototype.onData = function (buffer) {
-  
-  this.emit('data', JSON.parse(buffer));
-  
+    buffer = buffer.toString('utf8');
+    if(buffer.includes("}{")){
+        buffer = buffer.replace("}{","}${");
+        var bufferArray = buffer.split("$");
+        for (str in bufferArray) {
+            this.emit('data', JSON.parse(str));
+        }
+    }else{
+        this.emit('data', JSON.parse(buffer));
+    }
 };
 
 //Kill sniffer process when exit
